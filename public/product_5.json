@@ -1,11 +1,11 @@
 {
     "data": {
-        "id": 1,
+        "id": 5,
         "image": "laptop_1.png",
         "rate": 4,
         "reviewCount": 4,
         "model": "SKU D5515AI",
-        "title": "Demo 1 MSI MPG Trident 3",
+        "title": "Demo 5 MSI MPG Trident 3",
         "price": 495.0,
         "discountedPrice": 495.0,
         "cpu": "",

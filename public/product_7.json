@@ -1,19 +1,19 @@
 {
     "data": {
-        "id": 1,
-        "image": "laptop_1.png",
+        "id": 7,
+        "image": "laptop_3.png",
         "rate": 4,
         "reviewCount": 4,
         "model": "SKU D5515AI",
-        "title": "Demo 1 MSI MPG Trident 3",
-        "price": 495.0,
-        "discountedPrice": 495.0,
+        "title": "Demo 7 MSI CREATOR 17",
+        "price": 497.0,
+        "discountedPrice": 600.0,
         "cpu": "",
         "featured": "",
         "ports": "",
         "inStock": true,
         "color": "#000000",
-        "catId": 1,
+        "catId": 3,
         "features": [
             "Intel Core i7-10700F",
             "Intel H410",
@@ -29,6 +29,7 @@
             "PSU 330W",
             "Fan Cooler"
         ],
+
         "description": "MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop"
     }
 }
