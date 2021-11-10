@@ -35,5 +35,3 @@ export default class ProductDetail extends Vue {
     gap: 15px;
 }
 </style>
-<style>
-</style>

@@ -30,14 +30,116 @@
                             v-model.number="pageLimit"
                         ></custom-select>
                         <div class="layout-select">
-                            <img
-                                class="icon"
-                                :src="require('../../../assets/images/layout_1_icon.png')"
-                            />
-                            <img
-                                class="icon"
-                                :src="require('../../../assets/images/layout_2_icon.png')"
-                            />
+                            <svg
+                                @click="changeDisplayMode('grid')"
+                                width="32"
+                                height="33"
+                                viewBox="0 0 32 33"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect
+                                    width="32"
+                                    height="32"
+                                    transform="translate(0 0.404541)"
+                                    fill="white"
+                                />
+                                <rect
+                                    x="6.40039"
+                                    y="6.80469"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="6.40039"
+                                    y="14.1189"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="6.40039"
+                                    y="21.4331"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="13.7139"
+                                    y="14.1189"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="13.7139"
+                                    y="21.4331"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="13.7139"
+                                    y="6.80469"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="21.0283"
+                                    y="14.1189"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="21.0283"
+                                    y="21.4331"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="21.0283"
+                                    y="6.80469"
+                                    width="4.57143"
+                                    height="4.57143"
+                                    fill="#A2A6B0"
+                                />
+                            </svg>
+
+                            <svg
+                                @click="changeDisplayMode('list')"
+                                width="32"
+                                height="33"
+                                viewBox="0 0 32 33"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect width="32" height="32" fill="white" />
+                                <rect
+                                    x="4.57129"
+                                    y="21.0286"
+                                    width="9.14286"
+                                    height="2.74286"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="4.57129"
+                                    y="8.22858"
+                                    width="21.9429"
+                                    height="2.74286"
+                                    fill="#A2A6B0"
+                                />
+                                <rect
+                                    x="4.57129"
+                                    y="14.6286"
+                                    width="16.4571"
+                                    height="2.74286"
+                                    fill="#A2A6B0"
+                                />
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -57,13 +159,26 @@
                         Clear All
                     </button>
                 </div>
-                <div class="product-list">
+                <div class="product-list" v-if="displayMode === 'list'">
                     <product-card
                         v-for="product in productList"
                         :key="product.id"
                         :product="product"
                     ></product-card>
                 </div>
+                <el-row v-else>
+                    <el-col
+                        :xs="24"
+                        :sm="8"
+                        :md="6"
+                        :lg="4"
+                        class="product"
+                        v-for="product in productList"
+                        :key="product.id"
+                    >
+                        <product-card-grid :product="product"></product-card-grid
+                    ></el-col>
+                </el-row>
                 <el-pagination
                     background
                     layout="prev, pager, next"
@@ -87,6 +202,7 @@ import Sidebar from '../components/Sidebar.vue';
 import CustomSelect from '../components/CustomSelect.vue';
 import SelectedTag from '../components/SelectedTag.vue';
 import ProductCard from '../components/ProductCard.vue';
+import ProductCardGrid from '../components/ProductCardGrid.vue';
 import { productModule } from '../store';
 @Options({
     components: {
@@ -94,9 +210,12 @@ import { productModule } from '../store';
         CustomSelect,
         SelectedTag,
         ProductCard,
+        ProductCardGrid,
     },
 })
 export default class HomePage extends Vue {
+    displayMode = 'grid';
+
     breadcrumb: string[] = [
         'Home',
         'Laptops',
@@ -114,11 +233,11 @@ export default class HomePage extends Vue {
     showLimit: ICustomSelect[] = [
         { name: '1 per page', value: 1 },
         { name: '2 per page', value: 2 },
-        { name: '3 per page', value: 3 },
         { name: '4 per page', value: 4 },
+        { name: '8 per page', value: 8 },
     ];
 
-    pageLimit = 4;
+    pageLimit = 8;
 
     currentPage = 1;
 
@@ -202,6 +321,10 @@ export default class HomePage extends Vue {
         return Math.min(this.itemStartIndex + this.pageLimit - 1, this.totalProduct);
     }
 
+    changeDisplayMode(mode: string): void {
+        this.displayMode = mode;
+    }
+
     resetSelectCategoryList(): void {
         productModule.resetSelectCategory();
     }
@@ -256,6 +379,9 @@ export default class HomePage extends Vue {
 .product-list {
     margin-top: 21px;
 }
+.product {
+    min-width: 20% !important;
+}
 .clear-button {
     padding: 9px 15px;
     border: 1px solid #cacdd8;
@@ -269,6 +395,9 @@ export default class HomePage extends Vue {
     background: inherit;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
+}
+.layout-select > svg {
+    cursor: pointer;
 }
 @media only screen and (max-width: 600px) {
     .heading {
