@@ -7,10 +7,10 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 #app {
     width: 100%;
-    font-family: 'Poppins', sans-serif;
     background-color: #fefefe;
 }
 .el-button,
